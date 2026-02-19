@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini Blog</title>
+    <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
+</head>
+<body>
+
+    <header>
+        <h1>Mini Blog</h1>
+        <nav>
+            <a href="/">Inicio</a> |
+            <a href="/autor/">Autor</a> |
+            <a href="/categoria/">Categoría</a> |
+            <a href="/post/">Post</a> |
+            <a href="/buscar/">Buscar</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+
+    <hr>
+
+    <footer>
+        <p>
+            ©  {% now "Y" %} – Thiago Fernandez Procacci
+        </p>
+        <p>
+            <a href="https://github.com/ThiagoFernandez" target="_blank" rel="noopener noreferrer">
+                GitHub
+            </a>
+            |
+            <a href="https://twitter.com/zanto" target="_blank" rel="noopener noreferrer">
+                Twitter
+            </a>
+        </p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+
+{% block contenido %}
+<h2>Buscar Post</h2>
+
+<form method="get">
+    <input type="text" name="titulo" placeholder="Título del post">
+    <button type="submit">Buscar</button>
+</form>
+
+<ul> <!--Esto me llevo mas tiempo ya que al parecer, sql se usa distinto en html q en python-->
+{% for post in resultados %}
+    <li> 
+        <strong>{{ post.titulo }}</strong><br>
+        Autor: {{ post.autor }}<br>
+        Categoría: {{ post.categoria }}<br>
+        <p>{{ post.contenido }}</p>
+    </li>
+{% empty %}
+    <li>No hay resultados</li>
+{% endfor %}
+</ul>
+{% endblock %}
