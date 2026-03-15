@@ -10,13 +10,52 @@
 
     <header>
         <h1>Mini Blog</h1>
-        <nav>
-            <a href="/">Inicio</a> |
-            <a href="/autor/">Autor</a> |
-            <a href="/categoria/">Categoría</a> |
-            <a href="/post/">Post</a> |
-            <a href="/buscar/">Buscar</a>
-        </nav>
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Blog</title>
+
+</head>
+
+<body>
+
+<nav>
+
+<a href="/">Home</a>
+
+<a href="/about/">About</a>
+
+<a href="/pages/">Pages</a>
+
+{% if user.is_authenticated %}
+
+<a href="/accounts/profile/">Profile</a>
+
+<a href="/messages/">Messages</a>
+
+<a href="/accounts/logout/">Logout</a>
+
+{% else %}
+
+<a href="/accounts/login/">Login</a>
+
+<a href="/accounts/signup/">Signup</a>
+
+{% endif %}
+
+</nav>
+
+<hr>
+
+{% block contenido %}
+
+{% endblock %}
+
+</body>
+
+</html>
         <hr>
     </header>
 

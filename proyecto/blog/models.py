@@ -1,25 +1,20 @@
 from django.db import models
-
-class Autor(models.Model):
-    nombre = models.CharField(max_length=100)
-    email = models.EmailField()
-
-    def __str__(self):
-        return self.nombre
+from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 
-class Categoria(models.Model):
-    nombre = models.CharField(max_length=50)
+class Page(models.Model):
 
-    def __str__(self):
-        return self.nombre
+    title = models.CharField(max_length=200)
+    subtitle = models.CharField(max_length=200)
 
+    content = RichTextField()
 
-class Post(models.Model):
-    titulo = models.CharField(max_length=100)
-    contenido = models.TextField()
-    autor = models.ForeignKey(Autor, on_delete=models.CASCADE)
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='pages')
+
+    date = models.DateField(auto_now_add=True)
+
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.titulo
+        return self.title

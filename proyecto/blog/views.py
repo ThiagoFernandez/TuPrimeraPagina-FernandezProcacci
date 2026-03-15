@@ -1,51 +1,61 @@
-from django.shortcuts import render, redirect
-from .forms import AutorForm, CategoriaForm, PostForm
-from .models import Post
+from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from .models import Page
+
 
 def inicio(request):
+
     return render(request, "blog/inicio.html")
 
 
-def crear_autor(request):
-    form = AutorForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect("inicio")
-    return render(request, "blog/form.html", {
-        "form": form,
-        "titulo": "Crear Autor"
-    })
+def about(request):
+
+    return render(request, "blog/about.html")
 
 
-def crear_categoria(request):
-    form = CategoriaForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect("inicio")
-    return render(request, "blog/form.html", {
-        "form": form,
-        "titulo": "Crear Categoría"
-    })
+class PageList(ListView):
+
+    model = Page
+
+    template_name = "blog/pages.html"
 
 
-def crear_post(request):
-    form = PostForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect("inicio")
-    return render(request, "blog/form.html", {
-        "form": form,
-        "titulo": "Crear Post"
-    })
+class PageDetail(DetailView):
+
+    model = Page
+
+    template_name = "blog/page_detail.html"
 
 
-def buscar_post(request):
-    resultados = []
-    if request.GET.get("titulo"):
-        resultados = Post.objects.filter(
-            titulo__icontains=request.GET["titulo"]
-        )
+class PageCreate(LoginRequiredMixin, CreateView):
 
-    return render(request, "blog/buscar.html", {
-        "resultados": resultados
-    })
+    model = Page
+
+    fields = '__all__'
+
+    template_name = "blog/form.html"
+
+    success_url = reverse_lazy('pages')
+
+
+class PageUpdate(LoginRequiredMixin, UpdateView):
+
+    model = Page
+
+    fields = '__all__'
+
+    template_name = "blog/form.html"
+
+    success_url = reverse_lazy('pages')
+
+
+class PageDelete(LoginRequiredMixin, DeleteView):
+
+    model = Page
+
+    template_name = "blog/delete.html"
+
+    success_url = reverse_lazy('pages')

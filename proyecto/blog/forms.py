@@ -1,19 +1,8 @@
 from django import forms
-from .models import Autor, Categoria, Post
+from .models import Page
 
-class AutorForm(forms.ModelForm):
+class PageForm(forms.ModelForm):
+
     class Meta:
-        model = Autor
-        fields = "__all__"
-
-
-class CategoriaForm(forms.ModelForm):
-    class Meta:
-        model = Categoria
-        fields = "__all__"
-
-
-class PostForm(forms.ModelForm):
-    class Meta:
-        model = Post
-        fields = "__all__"
+        model = Page
+        fields = '__all__'
